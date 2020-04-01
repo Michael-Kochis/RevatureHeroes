@@ -4,4 +4,15 @@
   <artifactId>RevatureHeroes</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+	</dependencies>
+
+	<build>
+	</build>
+
 </project>
