@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Greeting;
 
 @RestController
@@ -31,13 +32,15 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) {
 		String url = req.getRequestURI().substring(16);
+		ObjectMapper om = new ObjectMapper();
 		if (url.contains("greeting")) {
 			try {
 				res.setContentType("text/html");
 				PrintWriter out = res.getWriter();
 				out.println(greeting("World") );
+				String jo = om.writeValueAsString(greeting("World") );
 				res.setContentType("application/json");
-				out.println(greeting("World") );
+				out.println(jo);
 
 			} catch (IOException e) {
 				log.warn("Error of dumbness: ", e);
