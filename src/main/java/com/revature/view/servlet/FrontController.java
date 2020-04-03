@@ -33,7 +33,10 @@ public class FrontController extends HttpServlet {
 		String url = req.getRequestURI().substring(16);
 		if (url.contains("greeting")) {
 			try {
+				res.setContentType("text/html");
 				PrintWriter out = res.getWriter();
+				out.println(greeting("World") );
+				res.setContentType("application/json");
 				out.println(greeting("World") );
 
 			} catch (IOException e) {

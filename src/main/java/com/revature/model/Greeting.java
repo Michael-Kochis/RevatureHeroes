@@ -58,7 +58,7 @@ public class Greeting {
 
 	@Override
 	public String toString() {
-		return "{id:" + id + ", content:\"" + content + "\"]";
+		return "{id:" + id + ", content:\"" + content + "\"}";
 	}
 
 	
