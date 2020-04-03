@@ -37,7 +37,7 @@ public class FrontController extends HttpServlet {
 			try {
 				res.setContentType("text/html");
 				PrintWriter out = res.getWriter();
-				out.println(greeting("World") );
+				//out.println(greeting("World") );
 				String jo = om.writeValueAsString(greeting("World") );
 				res.setContentType("application/json");
 				out.println(jo);
