@@ -18,7 +18,7 @@ import com.revature.model.Greeting;
 public class GreetingController {
 	private static Logger log = LogManager.getLogger(GreetingController.class);
 	private static final String template = "Hello, %s!";
-	private AtomicLong counter = new AtomicLong();
+	private static Long counter = new Long(0L);
 	
 	public Greeting greeting(HttpServletRequest req, HttpServletResponse res) {
 		ObjectMapper om = new ObjectMapper();
@@ -27,7 +27,7 @@ public class GreetingController {
 		if (name == null || name.length() == 0) {
 			name = "World";
 		}
-		Greeting returnThis = new Greeting(counter.incrementAndGet(), String.format(template, name));
+		Greeting returnThis = new Greeting(++counter, String.format(template, name));
 
 		try {
 			res.setContentType("text/html");
