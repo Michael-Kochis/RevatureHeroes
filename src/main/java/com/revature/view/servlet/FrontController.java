@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.controller.GreetingController;
 
-@RestController
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 5469009506125602565L;
 	private static Logger log = LogManager.getLogger(FrontController.class);
