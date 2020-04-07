@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.controller.GreetingController;
+import com.revature.service.UserService;
 
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 5469009506125602565L;
@@ -21,6 +21,9 @@ public class FrontController extends HttpServlet {
 			log.trace("Greeting detected");
 			GreetingController gc = new GreetingController();
 			gc.greeting(req, res);
+		} else if (url.contains("register")) {
+			log.trace("User registration detected.");
+			UserService.register(req, res);
 		}
 		System.out.println(url);
 	}
