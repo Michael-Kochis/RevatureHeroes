@@ -17,6 +17,7 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) {
 		String url = req.getRequestURI().substring(16);
+		
 		if (url.contains("greeting")) {
 			log.trace("Greeting detected");
 			GreetingController gc = new GreetingController();
@@ -26,5 +27,15 @@ public class FrontController extends HttpServlet {
 			UserService.register(req, res);
 		}
 		System.out.println(url);
+	}
+	
+	@Override
+	public void doPost(HttpServletRequest req, HttpServletResponse res) {
+		String url = req.getRequestURI().substring(16);
+		
+		if (url.contains("register")) {
+			log.trace("User registration detected.");
+			UserService.register(req, res);
+		}		
 	}
 }
