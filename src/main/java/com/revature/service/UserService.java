@@ -1,32 +1,36 @@
 package com.revature.service;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.model.LoginForm;
 
-
+@Controller
 public class UserService {
 	private static Logger log = LogManager.getLogger(UserService.class);
 	ObjectMapper om = new ObjectMapper();
 
-	public static void register(HttpServletRequest req, HttpServletResponse res) {
-		String uName = req.getParameter("username");
-		String pass = req.getParameter("password");
-		try {
-			PrintWriter out = res.getWriter();
-			out.println("Registration of user " + uName + " with password " + pass);
-			res.setContentType("application/json");
-            out.println("{ \"username\": \"" + uName + "\", \"password:\" \"" + pass +"\" }");
-		} catch (IOException e) {
-			log.warn("Exception in UserService: ", e);
+	@RequestMapping(value="/register", method= {RequestMethod.GET, RequestMethod.POST, 
+			RequestMethod.PUT})
+	public static ResponseEntity<LoginForm> register(HttpServletRequest req, 
+			HttpServletResponse res, @RequestBody LoginForm register) {
+		if (register == null) {
+			return null;
 		}
+		log.trace("Attempt to register " + register.getUserName() + ".");
+
+		res.setContentType("application/json");
+		return ResponseEntity.status(HttpStatus.OK).body(register);
 	}
 
 }

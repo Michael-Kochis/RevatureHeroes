@@ -33,15 +33,7 @@ public class GreetingController {
 		}
 		Greeting returnThis = new Greeting(++counter, String.format(template, name));
 
-		try {
-			res.setContentType("text/html");
-//			PrintWriter out = res.getWriter();
-			String jo = om.writeValueAsString(returnThis );
-			res.setContentType("application/json");
-//			out.println(jo);
-		} catch (IOException e) {
-			log.warn("Error of dumbness: ", e);
-		}
+		res.setContentType("application/json");
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
 		// should be interpreted as JSON
 	}
