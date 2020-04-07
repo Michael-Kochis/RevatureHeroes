@@ -43,6 +43,7 @@ public class GreetingController {
 			log.warn("Error of dumbness: ", e);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
+		// should be interpreted as JSON
 	}
 	
 }
