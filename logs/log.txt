@@ -1,0 +1,2 @@
+2020-04-08 16:42:31 INFO  AspectLogger:24 - com.revature.controller.GreetingController@418629e5 invoked ResponseEntity com.revature.controller.GreetingController.greeting(HttpServletRequest,HttpServletResponse)
+2020-04-08 16:42:35 INFO  AspectLogger:24 - com.revature.controller.GreetingController@418629e5 invoked ResponseEntity com.revature.controller.GreetingController.greeting(HttpServletRequest,HttpServletResponse)

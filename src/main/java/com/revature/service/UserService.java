@@ -35,4 +35,17 @@ public class UserService {
 		return ResponseEntity.status(HttpStatus.OK).body(register);
 	}
 
+	@RequestMapping(value="/register", method= {RequestMethod.GET, RequestMethod.POST, 
+			RequestMethod.PUT})
+    public static ResponseEntity<LoginForm> login(HttpServletRequest req,
+    		HttpServletResponse res, @RequestBody LoginForm login) {
+		if (login == null) {
+			return null;
+		}
+		log.trace("Attempt to login " + login.getUserName() + ".");
+
+		res.setContentType("application/json");
+		return ResponseEntity.status(HttpStatus.OK).body(login);
+		
+	}
 }
