@@ -35,7 +35,7 @@ public class UserService {
 		return ResponseEntity.status(HttpStatus.OK).body(register);
 	}
 
-	@RequestMapping(value="/register", method= {RequestMethod.GET, RequestMethod.POST, 
+	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST, 
 			RequestMethod.PUT})
     public static ResponseEntity<LoginForm> login(HttpServletRequest req,
     		HttpServletResponse res, @RequestBody LoginForm login) {
