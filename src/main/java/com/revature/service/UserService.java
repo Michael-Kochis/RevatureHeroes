@@ -43,9 +43,16 @@ public class UserService {
 			}
 		}
 
-		LoginForm returnThis = new LoginForm(user.getUsername(), user.getPassword() );
-		res.setContentType("application/json");
-		return ResponseEntity.status(HttpStatus.OK).body(returnThis);			
+		if (user == null ) {
+			user = dao.findUserByName(register.getUserName());
+		} 
+		if (user == null ) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
+			LoginForm returnThis = new LoginForm(user.getUsername(), user.getPassword() );
+			res.setContentType("application/json");
+			return ResponseEntity.status(HttpStatus.OK).body(returnThis);
+
 	}
 
 	private static User loginFormtoUser(LoginForm form) {
