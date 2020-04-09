@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.revature.dao.UserDAO;
+import com.revature.dao.interfaces.IUserDAO;
 import com.revature.model.LoginForm;
 import com.revature.model.User;
 
@@ -25,7 +25,7 @@ public class UserService {
 	private static SessionFactory sf;
 
 	@Autowired
-	static UserDAO dao;
+	static IUserDAO dao;
 
 	@RequestMapping(value="/register", method= {RequestMethod.GET, RequestMethod.POST, 
 			RequestMethod.PUT})
@@ -37,7 +37,6 @@ public class UserService {
 		} else {
 			user = loginFormtoUser(register);
 			user.encryptPassword();
-			dao.findAllUser();
 			if (dao.findUserByName(user.getUsername()) == null) {
 				dao.insert(user);
 			} else {
