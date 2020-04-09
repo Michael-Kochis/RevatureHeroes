@@ -82,10 +82,12 @@ public class UserService {
 	
 	@RequestMapping(value="/logout", method= {RequestMethod.GET, RequestMethod.POST, 
 			RequestMethod.PUT})
-	public void logout(HttpServletRequest req,
+	public ResponseEntity<LoginForm> logout(HttpServletRequest req,
 			HttpServletResponse res) {
 		Session s = sf.getCurrentSession();
 		s.setProperty("userID", 0);
 		s.close();
+		LoginForm returnThis = new LoginForm("Logout", "Logout");
+		return ResponseEntity.status(HttpStatus.OK).body(returnThis);		
 	}
 }
