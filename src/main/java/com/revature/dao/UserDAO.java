@@ -21,6 +21,11 @@ public class UserDAO implements IUserDAO {
 	@Autowired
 	private SessionFactory sf;
 
+	@Autowired
+	public UserDAO() {
+		super();
+	}
+	
 	@Override
 	public TreeSet<User> findAllUser() {
 		TreeSet<User> returnThis = new TreeSet<User>();
