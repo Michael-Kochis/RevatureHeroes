@@ -72,7 +72,7 @@ public class UserService {
 		} else if (!user.checkPassword(login.getPassword()) ) {
 			return null;
 		}
-		Session s = sf.getCurrentSession();
+		Session s = sf.openSession();
 		s.setProperty("userID", user.getId());
 
 		res.setContentType("application/json");
