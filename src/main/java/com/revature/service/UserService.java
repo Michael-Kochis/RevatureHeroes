@@ -86,5 +86,6 @@ public class UserService {
 			HttpServletResponse res) {
 		Session s = sf.getCurrentSession();
 		s.setProperty("userID", 0);
+		s.close();
 	}
 }
