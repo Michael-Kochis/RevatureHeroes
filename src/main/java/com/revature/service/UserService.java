@@ -2,6 +2,7 @@ package com.revature.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -72,8 +73,8 @@ public class UserService {
 		} else if (!user.checkPassword(login.getPassword()) ) {
 			return null;
 		}
-		Session s = sf.openSession();
-		s.setProperty("userID", user.getId() );
+		HttpSession s = req.getSession();
+		s.setAttribute("userID", user.getId() );;
 		login.setPassword(user.getPassword() );
 
 		res.setContentType("application/json");
@@ -84,10 +85,12 @@ public class UserService {
 			RequestMethod.PUT})
 	public ResponseEntity<LoginForm> logout(HttpServletRequest req,
 			HttpServletResponse res) {
-		Session s = sf.getCurrentSession();
-		s.setProperty("userID", 0);
-		s.close();
 		LoginForm returnThis = new LoginForm("Logout", "Logout");
+		HttpSession s = req.getSession();
+		returnThis.setUserName(s.getAttribute("userID").toString() );
+		s.setAttribute("userID", 0);;
+		s.invalidate();
+
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);		
 	}
 }
