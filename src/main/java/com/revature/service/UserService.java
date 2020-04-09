@@ -37,6 +37,7 @@ public class UserService {
 		} else {
 			user = loginFormtoUser(register);
 			user.encryptPassword();
+			System.out.println(dao);
 			if (dao.findUserByName(user.getUsername()) == null) {
 				dao.insert(user);
 			} else {

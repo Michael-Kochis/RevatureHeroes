@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.dao.interfaces.IUserDAO;
-import com.revature.model.PHash;
 import com.revature.model.User;
 
 @Repository
@@ -21,7 +20,6 @@ public class UserDAO implements IUserDAO {
 	@Autowired
 	private SessionFactory sf;
 
-	@Autowired
 	public UserDAO() {
 		super();
 	}
