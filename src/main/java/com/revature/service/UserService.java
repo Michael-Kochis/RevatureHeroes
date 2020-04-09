@@ -64,6 +64,8 @@ public class UserService {
 		User user = dao.findUserByName(login.getUserName());
 		if (user == null) {
 			return null;
+		} else if (!user.checkPassword(login.getPassword()) ) {
+			return null;
 		}
 		Session s = sf.getCurrentSession();
 		s.setProperty("userID", user.getId());
