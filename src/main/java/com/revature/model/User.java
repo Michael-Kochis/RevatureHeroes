@@ -16,7 +16,7 @@ public class User implements Comparable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	private int id;
+	private long id;
 	
 	@Column
 	private String username;
@@ -28,14 +28,14 @@ public class User implements Comparable{
 		super();
 	}
 
-	public User(int id, String username, String password) {
+	public User(long id, String username, String password) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -77,7 +77,14 @@ public class User implements Comparable{
 
 	@Override
 	public int compareTo(Object o) {
-		return (this.getId() - ((User) o).getId() );
+		long temp = (this.getId() - ((User) o).getId() );
+		if (temp < 0) {
+			return -1;
+		} else if (temp > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 	
 	@Override
