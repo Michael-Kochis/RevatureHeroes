@@ -2,6 +2,8 @@ package com.revature.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 @Table(name="RH_User")
 public class User {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private long id;
 	
@@ -55,6 +58,16 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	/**
+	 * Warning: use this only once per each user, ideally between registration and
+	 * saving to the database.
+	 */
+	public void encryptPassword() {
+		PHash ph = new PHash();
+		ph.setPassword(this.password);
+		this.password = ph.getHash();
 	}
 	
 	public boolean checkPassword(String s) {

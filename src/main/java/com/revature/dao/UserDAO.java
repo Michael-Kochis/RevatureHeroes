@@ -43,19 +43,27 @@ public class UserDAO implements IUserDAO {
 
 	@Override
 	public User findUserByName(String uName) {
-		return null;
+		TreeSet<User> list = findAllUser();
+		User returnThis = null;
+		
+		for (User user : list) {
+			if (user.getUsername().contains(uName)) {
+				returnThis = user;
+			}
+		}
+		return returnThis;
 	}
 
 	@Override
-	public void deleteUser(User u) {
-		// TODO Auto-generated method stub
-
+	public void deleteUser(User user) {
+		Session s = sf.getCurrentSession();
+		s.delete(user);
 	}
 
 	@Override
 	public void deleteUserByID(long id) {
-		// TODO Auto-generated method stub
-
+		User user = findUserByID(id);
+		deleteUser(user);
 	}
 
 	@Override

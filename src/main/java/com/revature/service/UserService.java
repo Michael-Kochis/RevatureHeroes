@@ -3,8 +3,9 @@ package com.revature.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.dao.UserDAO;
 import com.revature.model.LoginForm;
+import com.revature.model.User;
 
 @Controller
 @CrossOrigin
 public class UserService {
-	private static Logger log = LogManager.getLogger(UserService.class);
-	ObjectMapper om = new ObjectMapper();
+	@Autowired
+	private static SessionFactory sf;
+
+	static UserDAO dao = new UserDAO();
 
 	@RequestMapping(value="/register", method= {RequestMethod.GET, RequestMethod.POST, 
 			RequestMethod.PUT})
@@ -28,11 +32,26 @@ public class UserService {
 			HttpServletResponse res, @RequestBody LoginForm register) {
 		if (register == null) {
 			return null;
+		} else {
+			User user = loginFormtoUser(register);
+			user.encryptPassword();
+			if (dao.findUserByName(user.getUsername()) == null) {
+				dao.insert(user);
+			} else {
+				return null;
+			}
 		}
-		log.trace("Attempt to register " + register.getUserName() + ".");
 
 		res.setContentType("application/json");
 		return ResponseEntity.status(HttpStatus.OK).body(register);
+	}
+
+	private static User loginFormtoUser(LoginForm form) {
+		User returnThis = new User();
+		returnThis.setUsername(form.getUserName());
+		returnThis.setPassword(form.getPassword());
+		
+		return returnThis;
 	}
 
 	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST, 
@@ -42,10 +61,22 @@ public class UserService {
 		if (login == null) {
 			return null;
 		}
-		log.trace("Attempt to login " + login.getUserName() + ".");
+		User user = dao.findUserByName(login.getUserName());
+		if (user == null) {
+			return null;
+		}
+		Session s = sf.getCurrentSession();
+		s.setProperty("userID", user.getId());
 
 		res.setContentType("application/json");
-		return ResponseEntity.status(HttpStatus.OK).body(login);
-		
+		return ResponseEntity.status(HttpStatus.OK).body(login);		
+	}
+	
+	@RequestMapping(value="/logout", method= {RequestMethod.GET, RequestMethod.POST, 
+			RequestMethod.PUT})
+	public static void logout(HttpServletRequest req,
+			HttpServletResponse res) {
+		Session s = sf.getCurrentSession();
+		s.setProperty("userID", 0);
 	}
 }
