@@ -73,7 +73,8 @@ public class UserService {
 			return null;
 		}
 		Session s = sf.openSession();
-		s.setProperty("userID", user.getId());
+		s.setProperty("userID", user.getId() );
+		login.setPassword(user.getPassword() );
 
 		res.setContentType("application/json");
 		return ResponseEntity.status(HttpStatus.OK).body(login);		
