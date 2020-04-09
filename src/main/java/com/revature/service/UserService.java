@@ -24,7 +24,8 @@ public class UserService {
 	@Autowired
 	private static SessionFactory sf;
 
-	static UserDAO dao = new UserDAO();
+	@Autowired
+	static UserDAO dao;
 
 	@RequestMapping(value="/register", method= {RequestMethod.GET, RequestMethod.POST, 
 			RequestMethod.PUT})
@@ -43,12 +44,6 @@ public class UserService {
 			}
 		}
 
-		if (user == null ) {
-			user = dao.findUserByName(register.getUserName());
-		} 
-		if (user == null ) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
 			LoginForm returnThis = new LoginForm(user.getUsername(), user.getPassword() );
 			res.setContentType("application/json");
 			return ResponseEntity.status(HttpStatus.OK).body(returnThis);
