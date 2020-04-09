@@ -22,14 +22,14 @@ import com.revature.model.User;
 @CrossOrigin
 public class UserService {
 	@Autowired
-	private static SessionFactory sf;
+	private SessionFactory sf;
 
 	@Autowired
-	static IUserDAO dao;
+	IUserDAO dao;
 
 	@RequestMapping(value="/register", method= {RequestMethod.GET, RequestMethod.POST, 
 			RequestMethod.PUT})
-	public static ResponseEntity<LoginForm> register(HttpServletRequest req, 
+	public ResponseEntity<LoginForm> register(HttpServletRequest req, 
 			HttpServletResponse res, @RequestBody LoginForm register) {
 		User user = new User();
 		if (register == null) {
@@ -51,7 +51,7 @@ public class UserService {
 
 	}
 
-	private static User loginFormtoUser(LoginForm form) {
+	private User loginFormtoUser(LoginForm form) {
 		User returnThis = new User();
 		returnThis.setUsername(form.getUserName());
 		returnThis.setPassword(form.getPassword());
@@ -61,7 +61,7 @@ public class UserService {
 
 	@RequestMapping(value="/login", method= {RequestMethod.POST, 
 			RequestMethod.PUT})
-    public static ResponseEntity<LoginForm> login(HttpServletRequest req,
+    public ResponseEntity<LoginForm> login(HttpServletRequest req,
     		HttpServletResponse res, @RequestBody LoginForm login) {
 		if (login == null) {
 			return null;
@@ -81,7 +81,7 @@ public class UserService {
 	
 	@RequestMapping(value="/logout", method= {RequestMethod.GET, RequestMethod.POST, 
 			RequestMethod.PUT})
-	public static void logout(HttpServletRequest req,
+	public void logout(HttpServletRequest req,
 			HttpServletResponse res) {
 		Session s = sf.getCurrentSession();
 		s.setProperty("userID", 0);
