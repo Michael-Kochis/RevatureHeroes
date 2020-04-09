@@ -30,20 +30,22 @@ public class UserService {
 			RequestMethod.PUT})
 	public static ResponseEntity<LoginForm> register(HttpServletRequest req, 
 			HttpServletResponse res, @RequestBody LoginForm register) {
+		User user = new User();
 		if (register == null) {
 			return null;
 		} else {
-			User user = loginFormtoUser(register);
+			user = loginFormtoUser(register);
 			user.encryptPassword();
 			if (dao.findUserByName(user.getUsername()) == null) {
 				dao.insert(user);
 			} else {
-				return null;
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 			}
 		}
 
+		LoginForm returnThis = new LoginForm(user.getUsername(), user.getPassword() );
 		res.setContentType("application/json");
-		return ResponseEntity.status(HttpStatus.OK).body(register);
+		return ResponseEntity.status(HttpStatus.OK).body(returnThis);			
 	}
 
 	private static User loginFormtoUser(LoginForm form) {
@@ -54,7 +56,7 @@ public class UserService {
 		return returnThis;
 	}
 
-	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST, 
+	@RequestMapping(value="/login", method= {RequestMethod.POST, 
 			RequestMethod.PUT})
     public static ResponseEntity<LoginForm> login(HttpServletRequest req,
     		HttpServletResponse res, @RequestBody LoginForm login) {
