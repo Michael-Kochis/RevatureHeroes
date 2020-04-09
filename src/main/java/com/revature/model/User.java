@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="RH_User")
-public class User {
+public class User implements Comparable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	private long id;
+	private int id;
 	
 	@Column
 	private String username;
@@ -28,18 +28,18 @@ public class User {
 		super();
 	}
 
-	public User(long id, String username, String password) {
+	public User(int id, String username, String password) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -76,6 +76,11 @@ public class User {
 	}
 
 	@Override
+	public int compareTo(Object o) {
+		return (this.getId() - ((User) o).getId() );
+	}
+	
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -107,5 +112,5 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + "]";
 	}
-	
+
 }
