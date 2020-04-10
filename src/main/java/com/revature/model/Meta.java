@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Component
 @Entity
 @Table(name="META")
-public class Meta implements Comparable {
+public class Meta implements Comparable<Meta> {
 	
 	@Column
 	long ownerID;
@@ -48,7 +48,7 @@ public class Meta implements Comparable {
 	@Column
 	int combat;
 	
-	@JsonIgnore
+	@Column
 	String url;
 	
 	public Meta() {
@@ -60,6 +60,21 @@ public class Meta implements Comparable {
 		super();
 		this.ownerID = ownerID;
 		this.gameID = gameID;
+		this.superID = superID;
+		this.name = name;
+		this.intelligence = intelligence;
+		this.strength = strength;
+		this.speed = speed;
+		this.durability = durability;
+		this.power = power;
+		this.combat = combat;
+		this.url = url;
+	}
+
+	public Meta(long ownerID, long superID, String name, int intelligence, int strength, int speed,
+			int durability, int power, int combat, String url) {
+		super();
+		this.ownerID = ownerID;
 		this.superID = superID;
 		this.name = name;
 		this.intelligence = intelligence;
@@ -160,10 +175,10 @@ public class Meta implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		if (this.getGameID() < ((Meta) o).getGameID() ) {
+	public int compareTo(Meta other) {
+		if (this.getGameID() < other.getGameID() ) {
 			return -1;
-		} else if (this.getGameID() > ((Meta) o).getGameID() ) {
+		} else if (this.getGameID() > other.getGameID() ) {
 			return 1;
 		} else {
 			return 0;

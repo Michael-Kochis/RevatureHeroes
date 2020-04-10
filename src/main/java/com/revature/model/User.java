@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="RH_User")
-public class User implements Comparable{
+public class User implements Comparable<User> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
@@ -26,6 +26,12 @@ public class User implements Comparable{
 
 	public User() {
 		super();
+	}
+
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
 	}
 
 	public User(long id, String username, String password) {
@@ -76,8 +82,8 @@ public class User implements Comparable{
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		long temp = (this.getId() - ((User) o).getId() );
+	public int compareTo(User o) {
+		long temp = (this.getId() - o.getId() );
 		if (temp < 0) {
 			return -1;
 		} else if (temp > 0) {
