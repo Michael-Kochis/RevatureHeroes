@@ -21,6 +21,7 @@ import com.revature.dao.interfaces.IHeroDAO;
 import com.revature.dao.interfaces.IUserDAO;
 import com.revature.model.Hero;
 import com.revature.model.LoginForm;
+import com.revature.model.LoginResponse;
 import com.revature.model.User;
 
 @Controller
@@ -66,7 +67,7 @@ public class UserService {
 
 	@RequestMapping(value="/login", method= {RequestMethod.POST, 
 			RequestMethod.PUT})
-    public ResponseEntity<TreeSet<Hero>> login(HttpServletRequest req,
+    public ResponseEntity<LoginResponse> login(HttpServletRequest req,
     		HttpServletResponse res, @RequestBody LoginForm login) {
 		if (login == null) {
 			return null;
@@ -78,8 +79,10 @@ public class UserService {
 			return null;
 		}
 		TreeSet<Hero> list = hDao.findHeroByOwnerID(user.getId());
+		
+		LoginResponse lr = new LoginResponse(user.getId(), user.getUsername(), list);
 
-		return ResponseEntity.status(HttpStatus.OK).body(list);		
+		return ResponseEntity.status(HttpStatus.OK).body(lr);		
 	}
 	
 	@RequestMapping(value="/logout", method= {RequestMethod.GET, RequestMethod.POST, 
