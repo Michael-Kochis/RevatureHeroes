@@ -34,7 +34,7 @@ public class HeroService {
 		
 		dice.setSeed(System.currentTimeMillis());
 		
-		for (int i=0; i<3; i++) {
+		while (list.size() < 3) {
 			list.add(dice.nextInt(732)+1);
 		}
 		
