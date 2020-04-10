@@ -8,10 +8,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.revature.dao.interfaces.IHeroDAO;
 import com.revature.model.Hero;
 
+@Repository
 public class HeroDAO implements IHeroDAO {
 	@Autowired
 	SessionFactory sf;
