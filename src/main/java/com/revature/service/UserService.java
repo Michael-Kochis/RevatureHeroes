@@ -73,8 +73,6 @@ public class UserService {
 		} else if (!user.checkPassword(login.getPassword()) ) {
 			return null;
 		}
-		HttpSession s = req.getSession();
-		s.setAttribute("userID", user.getId() );;
 		login.setPassword(user.getPassword() );
 
 		res.setContentType("application/json");
@@ -86,11 +84,7 @@ public class UserService {
 	public ResponseEntity<LoginForm> logout(HttpServletRequest req,
 			HttpServletResponse res) {
 		LoginForm returnThis = new LoginForm("Logout", "Logout");
-		/*
-		 * HttpSession s = req.getSession();
-		 * returnThis.setUserName(s.getAttribute("userID").toString() );
-		 * s.setAttribute("userID", 0);; s.invalidate();
-		 */
+
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);		
 	}
 }
