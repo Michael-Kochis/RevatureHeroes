@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.TreeSet;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.revature.dao.interfaces.IHeroDAO;
 import com.revature.dao.interfaces.IUserDAO;
+import com.revature.model.Hero;
 import com.revature.model.LoginForm;
 import com.revature.model.User;
 
@@ -24,6 +28,9 @@ import com.revature.model.User;
 public class UserService {
 	@Autowired
 	IUserDAO dao;
+	
+	@Autowired
+	IHeroDAO hDao;
 
 	@RequestMapping(value="/register", method= {RequestMethod.GET, RequestMethod.POST, 
 			RequestMethod.PUT})
@@ -59,7 +66,7 @@ public class UserService {
 
 	@RequestMapping(value="/login", method= {RequestMethod.POST, 
 			RequestMethod.PUT})
-    public ResponseEntity<LoginForm> login(HttpServletRequest req,
+    public ResponseEntity<TreeSet<Hero>> login(HttpServletRequest req,
     		HttpServletResponse res, @RequestBody LoginForm login) {
 		if (login == null) {
 			return null;
@@ -70,10 +77,9 @@ public class UserService {
 		} else if (!user.checkPassword(login.getPassword()) ) {
 			return null;
 		}
-		login.setPassword(user.getPassword() );
+		TreeSet<Hero> list = hDao.findHeroByOwnerID(user.getId());
 
-		res.setContentType("application/json");
-		return ResponseEntity.status(HttpStatus.OK).body(login);		
+		return ResponseEntity.status(HttpStatus.OK).body(list);		
 	}
 	
 	@RequestMapping(value="/logout", method= {RequestMethod.GET, RequestMethod.POST, 
