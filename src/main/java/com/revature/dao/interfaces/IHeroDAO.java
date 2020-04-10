@@ -5,7 +5,7 @@ import java.util.TreeSet;
 import com.revature.model.Hero;
 
 public interface IHeroDAO {
-    public TreeSet<Hero> findAllUser();
+    public TreeSet<Hero> findAllHero();
     public TreeSet<Hero> findHeroByOwnerID(long id);
     public Hero findHeroByGameID(long id);
     public TreeSet<Hero> findHeroBySuperID(long id);
