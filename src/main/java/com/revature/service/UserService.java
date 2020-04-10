@@ -23,9 +23,6 @@ import com.revature.model.User;
 @CrossOrigin
 public class UserService {
 	@Autowired
-	private SessionFactory sf;
-
-	@Autowired
 	IUserDAO dao;
 
 	@RequestMapping(value="/register", method= {RequestMethod.GET, RequestMethod.POST, 
