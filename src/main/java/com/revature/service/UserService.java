@@ -82,6 +82,7 @@ public class UserService {
 		
 		LoginResponse lr = new LoginResponse(user.getId(), user.getUsername(), list);
 
+		res.setContentType("application/json");
 		return ResponseEntity.status(HttpStatus.OK).body(lr);		
 	}
 	
@@ -91,6 +92,7 @@ public class UserService {
 			HttpServletResponse res) {
 		LoginForm returnThis = new LoginForm("Logout", "Logout");
 
+		res.setContentType("application/json");
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);		
 	}
 }
