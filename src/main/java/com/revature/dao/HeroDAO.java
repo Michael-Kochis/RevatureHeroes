@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 import javax.persistence.criteria.CriteriaQuery;
+import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,6 +15,7 @@ import com.revature.dao.interfaces.IHeroDAO;
 import com.revature.model.Hero;
 
 @Repository
+@Transactional
 public class HeroDAO implements IHeroDAO {
 	@Autowired
 	SessionFactory sf;
@@ -108,7 +110,7 @@ public class HeroDAO implements IHeroDAO {
 	@Override
 	public void insert(Hero hero) {
 		Session s = sf.getCurrentSession();
-		s.save(hero);
+        s.save(hero);
 	}
 
 	@Override
