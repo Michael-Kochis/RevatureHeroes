@@ -51,17 +51,19 @@ public class HeroService {
 	
 	@RequestMapping(value="/saveHeroes", method= {RequestMethod.POST, RequestMethod.PUT})
 	public ResponseEntity<TreeSet<Hero>> saveHeroes(HttpServletRequest req, 
-			HttpServletResponse res,@RequestBody TreeSet<Hero> list) {
+			HttpServletResponse res,@RequestBody ArrayList<Hero> list) {
 		TreeSet<Hero> returnThis = new TreeSet<Hero>();
 		
-		/*
-		 * for (Hero hero : list) { dao.save(hero);
-		 * returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) ); }
-		 * 
-		 */		
+		
+		  for (Hero hero : list) { 
+			  dao.save(hero);
+			  returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) ); 
+		  }
+		  
+		 		
 		
 		res.setContentType("application/json");		
-		return ResponseEntity.status(HttpStatus.OK).body(list);
+		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
 	}
 	
 }
