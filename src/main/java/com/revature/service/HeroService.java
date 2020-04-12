@@ -50,8 +50,8 @@ public class HeroService {
 	}
 	
 	@RequestMapping(value="/saveHeroes", method= {RequestMethod.POST, RequestMethod.PUT})
-	public ResponseEntity<TreeSet<Object>> saveHeroes(HttpServletRequest req, 
-			HttpServletResponse res,@RequestBody TreeSet<Object> list) {
+	public ResponseEntity<TreeSet<Hero>> saveHeroes(HttpServletRequest req, 
+			HttpServletResponse res,@RequestBody TreeSet<Hero> list) {
 		TreeSet<Hero> returnThis = new TreeSet<Hero>();
 		
 		/*
