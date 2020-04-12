@@ -59,9 +59,7 @@ public class HeroService {
 			  dao.save(hero);
 			  returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) ); 
 		  }
-		  
 		 		
-		
 		res.setContentType("application/json");		
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
 	}
