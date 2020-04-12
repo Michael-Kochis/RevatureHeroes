@@ -54,12 +54,14 @@ public class HeroService {
 			HttpServletResponse res,@RequestBody ArrayList<Hero> list) {
 		TreeSet<Hero> returnThis = new TreeSet<Hero>();
 		
-		if (list.size() == 3) {
 		  for (Hero hero : list) { 
-			  dao.save(hero);
-			  returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) ); 
+			  if (dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) != null) {
+				  //hero exists, do nothing.
+			  } else {
+			    dao.save(hero);
+			  }
+			    returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) ); 
 		  }
-		}
 		 		
 		res.setContentType("application/json");		
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
