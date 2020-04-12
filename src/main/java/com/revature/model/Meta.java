@@ -86,6 +86,21 @@ public class Meta implements Comparable<Meta> {
 		this.url = url;
 	}
 
+	public Meta(int combat, int durability, long gameID, int intelligence, String name,
+			long ownerID, int power, int speed, int strength, long superID, String url) {
+		super();
+		this.ownerID = ownerID;
+		this.superID = superID;
+		this.name = name;
+		this.intelligence = intelligence;
+		this.strength = strength;
+		this.speed = speed;
+		this.durability = durability;
+		this.power = power;
+		this.combat = combat;
+		this.url = url;
+	}
+
 	public long getOwnerID() {
 		return ownerID;
 	}
