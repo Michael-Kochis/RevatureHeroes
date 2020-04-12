@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.dao.interfaces.IHeroDAO;
 import com.revature.model.Hero;
+import com.revature.model.MetaInput;
 
 @Controller
 @CrossOrigin
@@ -49,16 +50,16 @@ public class HeroService {
 	}
 	
 	@RequestMapping(value="/saveHeroes", method= {RequestMethod.POST, RequestMethod.PUT})
-	public ResponseEntity<TreeSet<Hero>> saveHeroes(HttpServletRequest req, 
-			HttpServletResponse res,@RequestBody TreeSet<Hero> list) {
+	public ResponseEntity<TreeSet<MetaInput>> saveHeroes(HttpServletRequest req, 
+			HttpServletResponse res,@RequestBody TreeSet<MetaInput> list) {
 		TreeSet<Hero> returnThis = new TreeSet<Hero>();
 		
-		for (Hero hero : list) {
-			dao.save(hero);
-			returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) );
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
+		/*
+		 * for (Hero hero : list) { dao.save(hero);
+		 * returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) ); }
+		 * 
+		 */		
+		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	
 }
