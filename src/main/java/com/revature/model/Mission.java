@@ -2,6 +2,7 @@ package com.revature.model;
 
 import java.time.LocalDateTime;
 import java.util.Dictionary;
+import java.util.Map;
 import java.util.TreeSet;
 
 import javax.persistence.Column;
@@ -35,7 +36,7 @@ public class Mission implements Comparable<Mission> {
 	private String description;
 	
 	@Column
-	private Dictionary<String, Integer> requirements;
+	private Map<String, Integer> requirements;
 	
 	@Column
 	private TreeSet<Long> heroes;
@@ -51,7 +52,7 @@ public class Mission implements Comparable<Mission> {
 	}
 
 	public Mission(long gameID, long templateID, long ownerID, String title, String description,
-			Dictionary<String, Integer> requirements, TreeSet<Long> heroes) {
+			Map<String, Integer> requirements, TreeSet<Long> heroes) {
 		super();
 		this.missionID = gameID;
 		this.templateID = templateID;
@@ -102,11 +103,11 @@ public class Mission implements Comparable<Mission> {
 		this.description = description;
 	}
 
-	public Dictionary<String, Integer> getRequirements() {
+	public Map<String, Integer> getRequirements() {
 		return requirements;
 	}
 
-	public void setRequirements(Dictionary<String, Integer> requirements) {
+	public void setRequirements(Map<String, Integer> requirements) {
 		this.requirements = requirements;
 	}
 
