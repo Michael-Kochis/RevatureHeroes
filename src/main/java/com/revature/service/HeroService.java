@@ -8,8 +8,6 @@ import java.util.TreeSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.dao.interfaces.IHeroDAO;
 import com.revature.model.Hero;
-import com.revature.model.MetaInput;
 
 @Controller
 @CrossOrigin
 public class HeroService {
-	@Autowired
-	private SessionFactory sf;
-
 	  @Autowired 
 	  IHeroDAO dao;
 	  	

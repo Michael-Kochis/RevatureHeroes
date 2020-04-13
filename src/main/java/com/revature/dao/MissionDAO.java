@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.dao.interfaces.IMissionDAO;
-import com.revature.model.Hero;
 import com.revature.model.Mission;
 
 @Repository
@@ -38,20 +37,28 @@ public class MissionDAO implements IMissionDAO {
 
 	@Override
 	public TreeSet<Mission> findMissionByOwnerID(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		TreeSet<Mission> returnThis = new TreeSet<Mission>();
+		TreeSet<Mission> list = findAllMission();
+		
+		for (Mission mission : list ) {
+			if (mission.getOwnerID() == id) {
+				returnThis.add(mission);
+			}
+		}
+		
+		return returnThis;
 	}
 
 	@Override
 	public TreeSet<Mission> findMyOpenMissions(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		TreeSet<Mission> returnThis = new TreeSet<Mission>();
+		return returnThis;
 	}
 
 	@Override
 	public TreeSet<Mission> findMyPastMissions(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		TreeSet<Mission> returnThis = new TreeSet<Mission>();
+		return returnThis;
 	}
 
 	@Override
@@ -62,20 +69,44 @@ public class MissionDAO implements IMissionDAO {
 
 	@Override
 	public TreeSet<Mission> findMissionByTemplateID(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		TreeSet<Mission> returnThis = new TreeSet<Mission>();
+		TreeSet<Mission> list = findAllMission();
+		
+		for (Mission mission : list ) {
+			if (mission.getTemplateID() == id) {
+				returnThis.add(mission);
+			}
+		}
+		
+		return returnThis;
 	}
 
 	@Override
 	public TreeSet<Mission> findMissionByTitle(String title) {
-		// TODO Auto-generated method stub
-		return null;
+		TreeSet<Mission> returnThis = new TreeSet<Mission>();
+		TreeSet<Mission> list = findAllMission();
+		
+		for (Mission mission : list ) {
+			if (mission.getTitle().equalsIgnoreCase(title) ) {
+				returnThis.add(mission);
+			}
+		}
+		
+		return returnThis;
 	}
 
 	@Override
 	public TreeSet<Mission> findMyMissionByTitle(long id, String name) {
-		// TODO Auto-generated method stub
-		return null;
+		TreeSet<Mission> returnThis = new TreeSet<Mission>();
+		TreeSet<Mission> list = findMissionByOwnerID(id);
+		
+		for (Mission mission : list ) {
+			if (mission.getTitle().equalsIgnoreCase(name) ) {
+				returnThis.add(mission);
+			}
+		}
+		
+		return returnThis;
 	}
 
 	@Override
@@ -97,8 +128,7 @@ public class MissionDAO implements IMissionDAO {
 
 	@Override
 	public void save(Mission mission) {
-		Session s = sf.getCurrentSession();
-		s.saveOrUpdate(mission);
+		insert(mission);
 	}
 
 	@Override
