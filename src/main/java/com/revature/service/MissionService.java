@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.dao.interfaces.IMissionDAO;
-import com.revature.model.Hero;
 import com.revature.model.Mission;
 
 @Controller
