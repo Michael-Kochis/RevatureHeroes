@@ -60,7 +60,7 @@ public class HeroService {
 			  } else {
 			    dao.save(hero);
 			  }
-			    returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) ); 
+			  returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) ); 
 		  }
 		 		
 		res.setContentType("application/json");		
