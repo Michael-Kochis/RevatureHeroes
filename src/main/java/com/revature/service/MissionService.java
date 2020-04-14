@@ -23,6 +23,22 @@ public class MissionService {
 	@Autowired
 	public IMissionDAO dao;
 	
+	@RequestMapping(value="/completeMission", method= {RequestMethod.POST, 
+			RequestMethod.PUT}) 
+	public ResponseEntity<Mission> completeMission(HttpServletRequest req, 
+			HttpServletResponse res, @RequestBody Mission mission) {
+		if (!mission.getMissionStatus().equalsIgnoreCase("In Progress")) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
+		mission.setMissionStatus("Completed");
+		dao.update(mission);
+		
+		// add replacement mission to player
+		// add to and return player treasury
+		
+		return ResponseEntity.status(HttpStatus.OK).body(mission);
+	}
+	
 	@RequestMapping(value="/getMissions", method= {RequestMethod.POST, 
 			RequestMethod.PUT}) 
 	public ResponseEntity<TreeSet<Mission>> getMissions(HttpServletRequest req, 
@@ -35,6 +51,17 @@ public class MissionService {
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	
-
+	@RequestMapping(value="/startMission", method= {RequestMethod.POST, 
+			RequestMethod.PUT}) 
+	public ResponseEntity<Mission> startMission(HttpServletRequest req, 
+			HttpServletResponse res, @RequestBody Mission mission) {
+		if (!mission.getMissionStatus().equalsIgnoreCase("Available")) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
+		mission.setMissionStatus("In Progress.");
+		dao.update(mission);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(mission);
+	}
 
 }

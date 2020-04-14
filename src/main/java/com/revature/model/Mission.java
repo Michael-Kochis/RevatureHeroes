@@ -55,16 +55,48 @@ public class Mission implements Comparable<Mission> {
 		super();
 	}
 
-	public Mission(long gameID, long templateID, long ownerID, String title, String description,
-			TreeMap<String, Object> requirements, TreeSet<Long> heroes) {
+	public Mission(long missionID, long templateID, long ownerID, String title, String description,
+			TreeMap<String, Object> requirements, TreeSet<Long> heroes, LocalDateTime missionStart,
+			LocalDateTime missionFinish, String missionStatus) {
 		super();
-		this.missionID = gameID;
+		this.missionID = missionID;
 		this.templateID = templateID;
 		this.ownerID = ownerID;
 		this.title = title;
 		this.description = description;
 		this.requirements = requirements;
 		this.heroes = heroes;
+		this.missionStart = missionStart;
+		this.missionFinish = missionFinish;
+		this.missionStatus = missionStatus;
+	}
+	
+	public LocalDateTime getMissionStart() {
+		return missionStart;
+	}
+
+	public void setMissionStart(LocalDateTime missionStart) {
+		this.missionStart = missionStart;
+	}
+
+	public LocalDateTime getMissionFinish() {
+		return missionFinish;
+	}
+
+	public void setMissionFinish(LocalDateTime missionFinish) {
+		this.missionFinish = missionFinish;
+	}
+
+	public String getMissionStatus() {
+		return missionStatus;
+	}
+
+	public void setMissionStatus(String missionStatus) {
+		this.missionStatus = missionStatus;
+	}
+
+	public void setMissionID(long missionID) {
+		this.missionID = missionID;
 	}
 
 	public long getMissionID() {
