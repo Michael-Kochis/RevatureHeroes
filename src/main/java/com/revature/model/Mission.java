@@ -115,6 +115,13 @@ public class Mission implements Comparable<Mission> {
 	public TreeSet<Long> getHeroes() {
 		return heroes;
 	}
+	
+	public void addReq(String s, Object o) {
+		if (this.requirements == null) {
+			this.requirements = new TreeMap<String, Object>();
+		}
+		this.requirements.put(s, o);
+	}
 
 	public void setHeroes(TreeSet<Long> heroes) {
 		this.heroes = heroes;
