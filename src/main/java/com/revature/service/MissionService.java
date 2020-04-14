@@ -23,10 +23,10 @@ public class MissionService {
 	@Autowired
 	public IMissionDAO dao;
 	
-	@RequestMapping(value="/getMissions", method= {RequestMethod.GET, RequestMethod.POST, 
+	@RequestMapping(value="/getMissions", method= {RequestMethod.POST, 
 			RequestMethod.PUT}) 
 	public ResponseEntity<TreeSet<Mission>> getMissions(HttpServletRequest req, 
-			HttpServletResponse res, @RequestBody Long id) {
+			HttpServletResponse res, @RequestBody long id) {
 		TreeSet<Mission> list = dao.findMissionByOwnerID(id);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(list);
