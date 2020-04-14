@@ -47,6 +47,9 @@ public class Mission implements Comparable<Mission> {
 	
 	@Column 
 	private LocalDateTime missionFinish;
+	
+	@Column
+	private String missionStatus;  // Available, In Progress, Completed
 
 	public Mission() {
 		super();

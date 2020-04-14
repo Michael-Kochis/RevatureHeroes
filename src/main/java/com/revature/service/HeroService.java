@@ -43,6 +43,27 @@ public class HeroService {
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	
+	@RequestMapping(value="/addHero", method= {RequestMethod.POST, RequestMethod.PUT})
+	public ResponseEntity<TreeSet<Hero>> saveHero(HttpServletRequest req, 
+			HttpServletResponse res,@RequestBody Hero hero) {
+		dao.save(hero);
+		TreeSet<Hero> returnThis = dao.findHeroByOwnerID(hero.getOwnerID());
+ 		
+		res.setContentType("application/json");		
+		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
+	}
+	
+	@RequestMapping(value="/deleteHero", method= {RequestMethod.POST, RequestMethod.PUT})
+	public ResponseEntity<TreeSet<Hero>> deleteHero(HttpServletRequest req, 
+			HttpServletResponse res,@RequestBody Hero hero) {
+		long id = hero.getOwnerID();
+		dao.deleteHero(hero);
+		TreeSet<Hero> returnThis = dao.findHeroByOwnerID(id);
+ 		
+		res.setContentType("application/json");		
+		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
+	}
+	
 	@RequestMapping(value="/saveHeroes", method= {RequestMethod.POST, RequestMethod.PUT})
 	public ResponseEntity<TreeSet<Hero>> saveHeroes(HttpServletRequest req, 
 			HttpServletResponse res,@RequestBody ArrayList<Hero> list) {
@@ -60,5 +81,17 @@ public class HeroService {
 		res.setContentType("application/json");		
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
 	}
+
+	@RequestMapping(value="/updateHero", method= {RequestMethod.POST, RequestMethod.PUT})
+	public ResponseEntity<TreeSet<Hero>> updateHero(HttpServletRequest req, 
+			HttpServletResponse res, @RequestBody Hero hero) {
+		long id = hero.getOwnerID();
+		dao.update(hero);
+		TreeSet<Hero> returnThis = dao.findHeroByOwnerID(id);
+ 		
+		res.setContentType("application/json");		
+		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
+	}
+	
 	
 }
