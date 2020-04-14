@@ -26,8 +26,8 @@ public class MissionService {
 	@RequestMapping(value="/getMissions", method= {RequestMethod.POST, 
 			RequestMethod.PUT}) 
 	public ResponseEntity<TreeSet<Mission>> getMissions(HttpServletRequest req, 
-			HttpServletResponse res, @RequestBody long id) {
-		TreeSet<Mission> list = dao.findMissionByOwnerID(id);
+			HttpServletResponse res) {
+		TreeSet<Mission> list = dao.findMissionByOwnerID(3L);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
