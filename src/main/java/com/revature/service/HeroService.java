@@ -53,7 +53,7 @@ public class HeroService {
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
 	}
 	
-	@RequestMapping(value="/deleteHero", method= {RequestMethod.POST, RequestMethod.PUT})
+	@RequestMapping(value="/deleteHero", method= {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT})
 	public ResponseEntity<TreeSet<Hero>> deleteHero(HttpServletRequest req, 
 			HttpServletResponse res,@RequestBody Hero hero) {
 		long id = hero.getOwnerID();
