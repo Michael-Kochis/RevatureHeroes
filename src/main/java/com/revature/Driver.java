@@ -1,5 +1,7 @@
 package com.revature;
 
+import java.util.TreeSet;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -30,8 +32,7 @@ public class Driver {
 		 * m.addReq("missionLevel", 180); m.addReq("missionDuration", 300);
 		 * 
 		 */		
-		Mission m = dao.generateMission(12);
-		System.out.println(m.toString());
+//		System.out.println(m.toString());
 		
 //		dao.update(m);
 
