@@ -78,6 +78,13 @@ public class MissionDAO implements IMissionDAO {
 			}
 		}
 		
+		if (list.size() == 0) {
+			Mission m = new Mission();
+			m.setTemplateID(id);
+			m.setTitle("Null database return");
+			returnThis.add(new Mission() );
+		}
+		
 		return returnThis;
 	}
 	
