@@ -83,9 +83,12 @@ public class MissionDAO implements IMissionDAO {
 	
 	@Override
 	public Mission generateMission(long id) {
+		Mission template = new Mission();
 		if (id > 24) id = 24;
 		TreeSet<Mission> list = findMissionByTemplateID(id);
-		Mission template = list.first();
+		if (!list.isEmpty() ) {
+			template = list.first();
+		}
 		Mission mission = new Mission(template);
 		
 		mission.setGameID(0);
@@ -94,6 +97,7 @@ public class MissionDAO implements IMissionDAO {
 		mission.setMissionStart(0);
 		mission.setMissionStatus("Available");
 		mission.setOwnerID(0);
+		
 		
 		return mission;
 	}
