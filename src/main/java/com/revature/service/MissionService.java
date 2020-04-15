@@ -2,6 +2,7 @@ package com.revature.service;
 
 import java.util.Random;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.dao.interfaces.IMissionDAO;
+import com.revature.dao.interfaces.IUserDAO;
 import com.revature.model.Mission;
+import com.revature.model.User;
 
 @Controller
 @CrossOrigin
@@ -26,9 +29,12 @@ public class MissionService {
 	@Autowired
 	public IMissionDAO dao;
 	
+	@Autowired
+	public IUserDAO udao;
+	
 	@RequestMapping(value="/completeMission", method= {RequestMethod.POST, 
 			RequestMethod.PUT}) 
-	public ResponseEntity<Mission> completeMission(HttpServletRequest req, 
+	public ResponseEntity<User> completeMission(HttpServletRequest req, 
 			HttpServletResponse res, @RequestBody Mission mission) {
 		if (!mission.getMissionStatus().equalsIgnoreCase("In Progress")) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -36,10 +42,16 @@ public class MissionService {
 		mission.setMissionStatus("Completed");
 		dao.update(mission);
 		
-		// add replacement mission to player
-		// add to and return player treasury
+		int rewards = (int) mission.getRequirements().floorEntry("missionLevel").getValue();
+		rewards /= 10;  if (rewards < 1) rewards = 1;
+		User user = udao.findUserByID(mission.getOwnerID() );
+		for (Long id : mission.getHeroes() ) {
+			user.addTreasury("power-up " + id, rewards);
+		}
+		user.addTreasury("hero essence", rewards*10);
+		user.addTreasury("hero dollars", rewards*rewards*10);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(mission);
+		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 	
 	@RequestMapping(value="/getMissions", method= {RequestMethod.POST, 

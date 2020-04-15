@@ -1,5 +1,8 @@
 package com.revature.model;
 
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +26,9 @@ public class User implements Comparable<User> {
 	
 	@Column(name="password")
 	private String password;
+	
+	@Column(name="treasury")
+	private TreeMap<String, Integer> treasury;
 
 	public User() {
 		super();
@@ -34,11 +40,12 @@ public class User implements Comparable<User> {
 		this.password = password;
 	}
 
-	public User(long id, String username, String password) {
+	public User(long id, String username, String password, TreeMap<String, Integer> stuff) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.treasury = stuff;
 	}
 
 	public long getId() {
@@ -65,7 +72,24 @@ public class User implements Comparable<User> {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public TreeMap<String, Integer> getTreasury() {
+		return treasury;
+	}
+
+	public void setTreasury(TreeMap<String, Integer> treasury) {
+		this.treasury = treasury;
+	}
 	
+	public void addTreasury(String key, Integer plus) {
+		if (this.treasury.containsKey(key)) {
+			Entry<String, Integer> temp = this.treasury.floorEntry(key);
+			this.treasury.replace(key, temp.getValue(), temp.getValue() + plus);
+		} else {
+			this.treasury.put(key, plus);
+		}
+	}
+
 	/**
 	 * Warning: use this only once per each user, ideally between registration and
 	 * saving to the database.
