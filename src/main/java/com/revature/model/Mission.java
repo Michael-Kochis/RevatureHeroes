@@ -43,6 +43,9 @@ public class Mission implements Comparable<Mission> {
 	private TreeSet<Long> heroes;
 	
 	@Column
+	private double missionSuccess;
+	
+	@Column
 	private Long missionStart;
 	
 	@Column 
@@ -56,8 +59,8 @@ public class Mission implements Comparable<Mission> {
 	}
 
 	public Mission(long missionID, long templateID, long ownerID, String title, String description,
-			TreeMap<String, Object> requirements, TreeSet<Long> heroes, long missionStart,
-			long missionFinish, String missionStatus) {
+			TreeMap<String, Object> requirements, TreeSet<Long> heroes, double missionSuccess, Long missionStart,
+			Long missionFinish, String missionStatus) {
 		super();
 		this.missionID = missionID;
 		this.templateID = templateID;
@@ -66,15 +69,16 @@ public class Mission implements Comparable<Mission> {
 		this.description = description;
 		this.requirements = requirements;
 		this.heroes = heroes;
+		this.missionSuccess = missionSuccess;
 		this.missionStart = missionStart;
 		this.missionFinish = missionFinish;
 		this.missionStatus = missionStatus;
 	}
-	
+
 	public Mission(Mission other) {
 		this(other.getMissionID(), other.getTemplateID(), other.getOwnerID(), other.getTitle(),
-				other.getDescription(), other.getRequirements(), other.getHeroes(), other.getMissionStart(),
-				other.getMissionFinish(), other.getMissionStatus() );
+				other.getDescription(), other.getRequirements(), other.getHeroes(), other.getMissionSuccess(),
+				other.getMissionStart(), other.getMissionFinish(), other.getMissionStatus() );
 	}
 
 	public long getMissionStart() {
@@ -157,6 +161,22 @@ public class Mission implements Comparable<Mission> {
 		return heroes;
 	}
 	
+	public double getMissionSuccess() {
+		return missionSuccess;
+	}
+
+	public void setMissionSuccess(double missionSuccess) {
+		this.missionSuccess = missionSuccess;
+	}
+
+	public void setMissionStart(Long missionStart) {
+		this.missionStart = missionStart;
+	}
+
+	public void setMissionFinish(Long missionFinish) {
+		this.missionFinish = missionFinish;
+	}
+
 	public void addReq(String s, Object o) {
 		if (this.requirements == null) {
 			this.requirements = new TreeMap<String, Object>();
@@ -173,9 +193,16 @@ public class Mission implements Comparable<Mission> {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + (int) (missionID ^ (missionID >>> 32));
 		result = prime * result + ((heroes == null) ? 0 : heroes.hashCode());
+		result = prime * result + ((missionFinish == null) ? 0 : missionFinish.hashCode());
+		result = prime * result + (int) (missionID ^ (missionID >>> 32));
+		result = prime * result + ((missionStart == null) ? 0 : missionStart.hashCode());
+		result = prime * result + ((missionStatus == null) ? 0 : missionStatus.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(missionSuccess);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + (int) (ownerID ^ (ownerID >>> 32));
+		result = prime * result + ((requirements == null) ? 0 : requirements.hashCode());
 		result = prime * result + (int) (templateID ^ (templateID >>> 32));
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
@@ -195,14 +222,36 @@ public class Mission implements Comparable<Mission> {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (missionID != other.missionID)
-			return false;
 		if (heroes == null) {
 			if (other.heroes != null)
 				return false;
 		} else if (!heroes.equals(other.heroes))
 			return false;
+		if (missionFinish == null) {
+			if (other.missionFinish != null)
+				return false;
+		} else if (!missionFinish.equals(other.missionFinish))
+			return false;
+		if (missionID != other.missionID)
+			return false;
+		if (missionStart == null) {
+			if (other.missionStart != null)
+				return false;
+		} else if (!missionStart.equals(other.missionStart))
+			return false;
+		if (missionStatus == null) {
+			if (other.missionStatus != null)
+				return false;
+		} else if (!missionStatus.equals(other.missionStatus))
+			return false;
+		if (Double.doubleToLongBits(missionSuccess) != Double.doubleToLongBits(other.missionSuccess))
+			return false;
 		if (ownerID != other.ownerID)
+			return false;
+		if (requirements == null) {
+			if (other.requirements != null)
+				return false;
+		} else if (!requirements.equals(other.requirements))
 			return false;
 		if (templateID != other.templateID)
 			return false;
@@ -215,12 +264,6 @@ public class Mission implements Comparable<Mission> {
 	}
 	
 	@Override
-	public String toString() {
-		return "Mission [missionID=" + missionID + ", templateID=" + templateID + ", ownerID=" + ownerID + ", title=" + title
-				+ ", description=" + description + ", requirements=" + requirements + ", heroes=" + heroes + "]";
-	}
-
-	@Override
 	public int compareTo(Mission other) {
 		long compareTo = missionID - other.missionID;
 		if (compareTo > 0) {
@@ -230,6 +273,14 @@ public class Mission implements Comparable<Mission> {
 		} else {
 			return 0;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Mission [missionID=" + missionID + ", templateID=" + templateID + ", ownerID=" + ownerID + ", title="
+				+ title + ", description=" + description + ", requirements=" + requirements + ", heroes=" + heroes
+				+ ", missionSuccess=" + missionSuccess + ", missionStart=" + missionStart + ", missionFinish="
+				+ missionFinish + ", missionStatus=" + missionStatus + "]";
 	}
 	
 }
