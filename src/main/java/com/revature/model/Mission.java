@@ -43,7 +43,7 @@ public class Mission implements Comparable<Mission> {
 	private TreeSet<Long> heroes;
 	
 	@Column
-	private double missionSuccess;
+	private Double missionSuccess;
 	
 	@Column
 	private Long missionStart;
@@ -59,7 +59,7 @@ public class Mission implements Comparable<Mission> {
 	}
 
 	public Mission(long missionID, long templateID, long ownerID, String title, String description,
-			TreeMap<String, Object> requirements, TreeSet<Long> heroes, double missionSuccess, Long missionStart,
+			TreeMap<String, Object> requirements, TreeSet<Long> heroes, Double missionSuccess, Long missionStart,
 			Long missionFinish, String missionStatus) {
 		super();
 		this.missionID = missionID;
@@ -161,11 +161,11 @@ public class Mission implements Comparable<Mission> {
 		return heroes;
 	}
 	
-	public double getMissionSuccess() {
+	public Double getMissionSuccess() {
 		return missionSuccess;
 	}
 
-	public void setMissionSuccess(double missionSuccess) {
+	public void setMissionSuccess(Double missionSuccess) {
 		this.missionSuccess = missionSuccess;
 	}
 
