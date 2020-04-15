@@ -83,6 +83,7 @@ public class MissionDAO implements IMissionDAO {
 	
 	@Override
 	public Mission generateMission(long id) {
+		if (id > 24) id = 24;
 		TreeSet<Mission> list = findMissionByTemplateID(id);
 		Mission template = list.first();
 		Mission mission = new Mission(template);
