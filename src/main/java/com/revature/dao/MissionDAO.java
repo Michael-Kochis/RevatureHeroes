@@ -105,6 +105,8 @@ public class MissionDAO implements IMissionDAO {
 		mission.setMissionStatus("Available");
 		mission.setOwnerID(0);
 		
+		save(mission);
+		
 		
 		return mission;
 	}
