@@ -82,6 +82,9 @@ public class Mission implements Comparable<Mission> {
 	}
 
 	public long getMissionStart() {
+		if (this.missionStart == null) {
+			this.missionStart = new Long(0L);
+		}
 		return missionStart;
 	}
 
@@ -90,6 +93,9 @@ public class Mission implements Comparable<Mission> {
 	}
 
 	public long getMissionFinish() {
+		if (this.missionFinish == null) {
+			this.missionFinish = new Long(0L);
+		}
 		return missionFinish;
 	}
 

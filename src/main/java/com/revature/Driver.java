@@ -38,7 +38,8 @@ public class Driver {
 		 * m.addReq("missionLevel", 180); m.addReq("missionDuration", 300);
 		 * 
 		 */		
-//		System.out.println(m.toString());
+		Mission m = dao.generateMission(12);
+		System.out.println(m.toString());
 		
 //		dao.update(m);
 
