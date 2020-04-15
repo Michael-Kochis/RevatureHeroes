@@ -93,4 +93,12 @@ public class UserService {
 
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);		
 	}
+	
+	@RequestMapping(value="/updateUser", method= {RequestMethod.POST, RequestMethod.PUT}) 
+	public ResponseEntity<User> updateUser(HttpServletRequest req,
+			HttpServletResponse res, @RequestBody User user) {
+		dao.update(user);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(user);
+	}
 }
