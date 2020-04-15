@@ -73,9 +73,9 @@ public class MissionDAO implements IMissionDAO {
 		TreeSet<Mission> list = findAllMission();
 		
 		for (Mission mission : list ) {
-			if (mission.getTemplateID() == id) {
+			//if (mission.getTemplateID() == id) {
 				returnThis.add(mission);
-			}
+			//}
 		}
 		
 		if (list.size() == 0) {
