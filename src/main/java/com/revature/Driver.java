@@ -1,18 +1,10 @@
 package com.revature;
 
-import java.util.TreeMap;
-import java.util.TreeSet;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.revature.dao.interfaces.IHeroDAO;
 import com.revature.dao.interfaces.IMissionDAO;
-import com.revature.dao.interfaces.IUserDAO;
-import com.revature.model.Hero;
 import com.revature.model.Mission;
-import com.revature.model.PHash;
-import com.revature.model.User;
 
 public class Driver {
 
