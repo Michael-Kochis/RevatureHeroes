@@ -198,8 +198,6 @@ public class Mission implements Comparable<Mission> {
 		result = prime * result + (int) (missionID ^ (missionID >>> 32));
 		result = prime * result + ((missionStart == null) ? 0 : missionStart.hashCode());
 		result = prime * result + ((missionStatus == null) ? 0 : missionStatus.hashCode());
-		long temp;
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + (int) (ownerID ^ (ownerID >>> 32));
 		result = prime * result + ((requirements == null) ? 0 : requirements.hashCode());
 		result = prime * result + (int) (templateID ^ (templateID >>> 32));
