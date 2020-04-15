@@ -1,5 +1,8 @@
 package com.revature;
 
+import java.util.TreeMap;
+import java.util.TreeSet;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -25,21 +28,19 @@ public class Driver {
 //	    User u2 = dao.findUserByID(2L);
 	    
 		/*
-		 * Hero h = new Hero(); h.setOwnerID(4L); h.setCombat(40); h.setDurability(80);
-		 * h.setIntelligence(25); h.setName("Rhishisikk"); h.setPower(40);
-		 * h.setSpeed(20); h.setStrength(20); h.setSuperID(0L); h.setUrl("Custom Hero");
+		 * Mission m = new Mission(); m.setMissionStatus("Available"); m.setHeroes(new
+		 * TreeSet<Long>() ); m.setOwnerID(0); m.setRequirements(new TreeMap<String,
+		 * Object>() );
 		 * 
-		 * hdao.insert(h);
-		 */
-		
-		Mission m = dao.findMissionByMissionID(1);
-		/*
-		 * m.addReq("heroesRequired", 1); m.addReq("statRequired", "speed");
-		 * m.addReq("missionLevel", 10); m.addReq("missionDuration", 30);
+		 * m.setTemplateID(24); m.setTitle("Alien Invasion");
+		 * m.setDescription("Convince aliens that Earth is not an easy conquest.");
+		 * m.addReq("heroesRequired", 3); m.addReq("statRequired", "power");
+		 * m.addReq("missionLevel", 180); m.addReq("missionDuration", 300);
+		 * 
 		 */		
-		System.out.println(m.toString());
+//		System.out.println(m.toString());
 		
-//		dao.save(m);
+//		dao.update(m);
 
 //	    dao.update(u);
 //	    dao.update(u2);

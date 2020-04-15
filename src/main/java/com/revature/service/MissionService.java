@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.Random;
 import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,8 @@ import com.revature.model.Mission;
 @Controller
 @CrossOrigin
 public class MissionService {
+	static long maxTemplate = 24;
+	
 	@Autowired
 	public IMissionDAO dao;
 	
@@ -47,6 +50,21 @@ public class MissionService {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
 		TreeSet<Mission> list = dao.findMissionByOwnerID(id);
+		int availableCount = 0;
+		for (Mission m : list) {
+			if (m.getMissionStatus().equalsIgnoreCase("Available") ) {
+				availableCount++;
+			}
+		}
+		
+		Random dice = new Random();  dice.setSeed(System.currentTimeMillis() );
+		while (availableCount < 3) {		
+			long x = (dice.nextLong()*maxTemplate) + 1;
+			Mission m = dao.generateMission(x);
+			m.setOwnerID(id);
+			availableCount++;
+		}
+		
 		
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}

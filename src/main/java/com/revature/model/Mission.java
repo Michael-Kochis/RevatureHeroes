@@ -43,10 +43,10 @@ public class Mission implements Comparable<Mission> {
 	private TreeSet<Long> heroes;
 	
 	@Column
-	private LocalDateTime missionStart;
+	private Long missionStart;
 	
 	@Column 
-	private LocalDateTime missionFinish;
+	private Long missionFinish;
 	
 	@Column
 	private String missionStatus;  // Available, In Progress, Completed
@@ -56,8 +56,8 @@ public class Mission implements Comparable<Mission> {
 	}
 
 	public Mission(long missionID, long templateID, long ownerID, String title, String description,
-			TreeMap<String, Object> requirements, TreeSet<Long> heroes, LocalDateTime missionStart,
-			LocalDateTime missionFinish, String missionStatus) {
+			TreeMap<String, Object> requirements, TreeSet<Long> heroes, long missionStart,
+			long missionFinish, String missionStatus) {
 		super();
 		this.missionID = missionID;
 		this.templateID = templateID;
@@ -71,19 +71,25 @@ public class Mission implements Comparable<Mission> {
 		this.missionStatus = missionStatus;
 	}
 	
-	public LocalDateTime getMissionStart() {
+	public Mission(Mission other) {
+		this(other.getMissionID(), other.getTemplateID(), other.getOwnerID(), other.getTitle(),
+				other.getDescription(), other.getRequirements(), other.getHeroes(), other.getMissionStart(),
+				other.getMissionFinish(), other.getMissionStatus() );
+	}
+
+	public long getMissionStart() {
 		return missionStart;
 	}
 
-	public void setMissionStart(LocalDateTime missionStart) {
+	public void setMissionStart(long missionStart) {
 		this.missionStart = missionStart;
 	}
 
-	public LocalDateTime getMissionFinish() {
+	public long getMissionFinish() {
 		return missionFinish;
 	}
 
-	public void setMissionFinish(LocalDateTime missionFinish) {
+	public void setMissionFinish(long missionFinish) {
 		this.missionFinish = missionFinish;
 	}
 

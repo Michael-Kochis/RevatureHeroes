@@ -15,6 +15,7 @@ public interface IMissionDAO {
     public TreeSet<Mission> findMyMissionByTitle(long id, String name);
     public void deleteMission(Mission mission);
     public void deleteMissionByID(long id);
+	public Mission generateMission(long x);
     public void insert(Mission mission);
     public void save(Mission mission);
     public void update(Mission mission);

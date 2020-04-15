@@ -80,6 +80,22 @@ public class MissionDAO implements IMissionDAO {
 		
 		return returnThis;
 	}
+	
+	@Override
+	public Mission generateMission(long id) {
+		TreeSet<Mission> list = findMissionByTemplateID(id);
+		Mission template = list.first();
+		Mission mission = new Mission(template);
+		
+		mission.setGameID(0);
+		mission.setHeroes(new TreeSet<Long>() );
+		mission.setMissionFinish(0);
+		mission.setMissionStart(0);
+		mission.setMissionStatus("Available");
+		mission.setOwnerID(0);
+		
+		return mission;
+	}
 
 	@Override
 	public TreeSet<Mission> findMissionByTitle(String title) {
