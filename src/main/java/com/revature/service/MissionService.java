@@ -46,10 +46,10 @@ public class MissionService {
 		rewards /= 10;  if (rewards < 1) rewards = 1;
 		User user = udao.findUserByID(mission.getOwnerID() );
 		for (Long id : mission.getHeroes() ) {
-			user.addTreasury("power-up " + id, rewards);
+			user.addTreasury("powerUp-" + id, rewards);
 		}
-		user.addTreasury("hero essence", rewards*10);
-		user.addTreasury("hero dollars", rewards*rewards*10);
+		user.addTreasury("heroEssence", rewards*10);
+		user.addTreasury("heroDollars", rewards*rewards*10);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}

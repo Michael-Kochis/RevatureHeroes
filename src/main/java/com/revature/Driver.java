@@ -39,9 +39,9 @@ public class Driver {
 		
 //		dao.update(m);
 
-	    u.addTreasury("power-up-327", 7);
-	    u.addTreasury("hero essence", 70);
-	    u.addTreasury("hero dollars", 700);
+	    u.addTreasury("powerUp-327", 21);
+	    u.addTreasury("heroEssence", 210);
+	    u.addTreasury("heroDollars", 7000);
 	    udao.update(u);
 	    System.out.println(u);
 //	    dao.update(u2);
