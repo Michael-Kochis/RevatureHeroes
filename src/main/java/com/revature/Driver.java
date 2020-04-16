@@ -1,5 +1,6 @@
 package com.revature;
 
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.springframework.context.ApplicationContext;
@@ -39,8 +40,9 @@ public class Driver {
 		
 //		dao.update(m);
 
-	    u.addTreasury("powerUp-327", 21);
-	    u.addTreasury("heroEssence", 210);
+//	    u.setTreasury(new TreeMap<String, Integer>() );
+	    u.addTreasury("powerUp", 35);
+	    u.addTreasury("heroEssence", 350);
 	    u.addTreasury("heroDollars", 7000);
 	    udao.update(u);
 	    System.out.println(u);
