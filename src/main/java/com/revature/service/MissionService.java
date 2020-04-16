@@ -75,6 +75,7 @@ public class MissionService {
 			System.out.println(x);
 			Mission m = dao.generateMission(x);
 			m.setOwnerID(id);
+			dao.update(m);
 			availableCount++;
 			list.add(m);
 		}
