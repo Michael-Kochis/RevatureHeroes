@@ -1,13 +1,8 @@
 package com.revature.service;
 
-import java.util.TreeSet;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.dao.interfaces.IHeroDAO;
 import com.revature.dao.interfaces.IUserDAO;
-import com.revature.model.Hero;
 import com.revature.model.LoginForm;
-import com.revature.model.LoginResponse;
 import com.revature.model.User;
 
 @Controller

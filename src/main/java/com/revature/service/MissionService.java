@@ -1,8 +1,6 @@
 package com.revature.service;
 
-import java.util.Random;
 import java.util.TreeSet;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

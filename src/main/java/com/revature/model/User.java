@@ -1,10 +1,8 @@
 package com.revature.model;
 
-import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
