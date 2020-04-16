@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,6 +65,14 @@ public class HeroService {
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
 	}
 	
+	@RequestMapping(value="/getHeroes/{id}", method= {RequestMethod.GET})
+	public ResponseEntity<TreeSet<Hero>> getUser(HttpServletRequest req,
+    		HttpServletResponse res, @PathVariable("id") long id) {
+		TreeSet<Hero> heroes = dao.findHeroByOwnerID(id);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(heroes);		
+	}
+
 	@RequestMapping(value="/saveHeroes", method= {RequestMethod.POST, RequestMethod.PUT})
 	public ResponseEntity<TreeSet<Hero>> saveHeroes(HttpServletRequest req, 
 			HttpServletResponse res,@RequestBody ArrayList<Hero> list) {
