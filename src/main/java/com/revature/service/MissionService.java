@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,13 +33,14 @@ public class MissionService {
 	
 	@RequestMapping(value="/completeMission", method= {RequestMethod.POST, 
 			RequestMethod.PUT}) 
-	public ResponseEntity<User> completeMission(HttpServletRequest req, 
+	public ResponseEntity<TreeMap<String, Integer>> completeMission(HttpServletRequest req, 
 			HttpServletResponse res, @RequestBody Mission mission) {
 		if (!mission.getMissionStatus().equalsIgnoreCase("In Progress")) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
 		mission.setMissionStatus("Completed");
 		dao.update(mission);
+		TreeMap<String, Integer> rewardList = new TreeMap<String, Integer>();
 		
 		int rewards = (int) mission.getRequirements().floorEntry("missionLevel").getValue();
 		rewards /= 10;  if (rewards < 1) rewards = 1;
@@ -46,10 +48,13 @@ public class MissionService {
 		for (Long id : mission.getHeroes() ) {
 			user.addTreasury("powerUp", rewards);
 		}
+		rewardList.put("powerUp", rewards);
 		user.addTreasury("heroEssence", rewards*10);
+		rewardList.put("heroEssence", rewards*10);
 		user.addTreasury("heroDollars", rewards*rewards*10);
+		rewardList.put("heroDollars", rewards*rewards*10);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(user);
+		return ResponseEntity.status(HttpStatus.OK).body(rewardList);
 	}
 	
 	@RequestMapping(value="/getMissions", method= {RequestMethod.POST, 
