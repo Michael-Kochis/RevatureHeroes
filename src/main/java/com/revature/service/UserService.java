@@ -67,7 +67,7 @@ public class UserService {
 
 	@RequestMapping(value="/login", method= {RequestMethod.POST, 
 			RequestMethod.PUT})
-    public ResponseEntity<LoginResponse> login(HttpServletRequest req,
+    public ResponseEntity<User> login(HttpServletRequest req,
     		HttpServletResponse res, @RequestBody LoginForm login) {
 		if (login == null) {
 			return null;
@@ -78,11 +78,8 @@ public class UserService {
 		} else if (!user.checkPassword(login.getPassword()) ) {
 			return null;
 		}
-		TreeSet<Hero> list = hDao.findHeroByOwnerID(user.getId());
-		
-		LoginResponse lr = new LoginResponse(user.getId(), user.getUsername(), list);
 
-		return ResponseEntity.status(HttpStatus.OK).body(lr);		
+		return ResponseEntity.status(HttpStatus.OK).body(user);		
 	}
 	
 	@RequestMapping(value="/logout", method= {RequestMethod.GET, RequestMethod.POST, 

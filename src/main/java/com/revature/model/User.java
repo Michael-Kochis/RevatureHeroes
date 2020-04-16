@@ -82,6 +82,7 @@ public class User implements Comparable<User> {
 	}
 	
 	public void addTreasury(String key, Integer plus) {
+		if (this.treasury == null) this.treasury = new TreeMap<String, Integer>();
 		if (this.treasury.containsKey(key)) {
 			Entry<String, Integer> temp = this.treasury.floorEntry(key);
 			this.treasury.replace(key, temp.getValue(), temp.getValue() + plus);
