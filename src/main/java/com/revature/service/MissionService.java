@@ -69,10 +69,8 @@ public class MissionService {
 			}
 		}
 		
-		Random dice = new Random();  
-		dice.setSeed(System.currentTimeMillis() );
 		while (availableCount < 3) {		
-			long x = (dice.nextLong()%maxTemplate ) + 1;
+			long x = (long)(Math.random()*maxTemplate ) + 1;
 			System.out.println(x);
 			Mission m = dao.generateMission(x);
 			m.setOwnerID(id);
