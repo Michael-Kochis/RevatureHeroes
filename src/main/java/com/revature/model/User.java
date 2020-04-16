@@ -1,13 +1,18 @@
 package com.revature.model;
 
+import java.util.ArrayList;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -29,6 +34,9 @@ public class User implements Comparable<User> {
 	
 	@Column(name="treasury")
 	private TreeMap<String, Integer> treasury;
+	
+	@OneToMany(mappedBy="ownerID", fetch=FetchType.EAGER)
+	private Set<Hero> heroes;
 
 	public User() {
 		super();
@@ -40,12 +48,13 @@ public class User implements Comparable<User> {
 		this.password = password;
 	}
 
-	public User(long id, String username, String password, TreeMap<String, Integer> stuff) {
+	public User(long id, String username, String password, TreeMap<String, Integer> treasury, Set<Hero> heroes) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.treasury = stuff;
+		this.treasury = treasury;
+		this.heroes = heroes;
 	}
 
 	public long getId() {
@@ -81,6 +90,14 @@ public class User implements Comparable<User> {
 		this.treasury = treasury;
 	}
 	
+	public Set<Hero> getHeroes() {
+		return heroes;
+	}
+
+	public void setHeroes(Set<Hero> heroes) {
+		this.heroes = heroes;
+	}
+
 	public void addTreasury(String key, Integer plus) {
 		if (this.treasury == null) this.treasury = new TreeMap<String, Integer>();
 		if (this.treasury.containsKey(key)) {
@@ -148,7 +165,8 @@ public class User implements Comparable<User> {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", treasury=" + treasury
+				+ ", heroes=" + heroes + "]";
 	}
 
 }

@@ -43,6 +43,7 @@ public class Driver {
 	    u.addTreasury("hero essence", 70);
 	    u.addTreasury("hero dollars", 700);
 	    udao.update(u);
+	    System.out.println(u);
 //	    dao.update(u2);
 //	    Hero h2 = hdao.findMyHeroByName(4L, "Rhishisikk");
 	    
