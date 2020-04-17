@@ -95,7 +95,7 @@ public class MissionService {
 		if (!mission.getMissionStatus().equalsIgnoreCase("Available")) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
-		mission.setMissionStatus("In Progress.");
+		mission.setMissionStatus("In Progress");
 		dao.update(mission);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(mission);
