@@ -10,7 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="META")
-public class Hero extends Meta {
+public class Hero extends Meta implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 660115881911642052L;
 
 	public Hero() {
 		super();
