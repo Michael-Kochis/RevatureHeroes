@@ -119,6 +119,9 @@ public class MissionService {
 		
 		user.addTreasury("heroEssence", rewards*mult);	
 		user.addTreasury("heroDollars", rewards*rewards*mult);	
+		
+		mission.setMissionStatus("Completed");
+		dao.update(mission);
 	}
 
 }
