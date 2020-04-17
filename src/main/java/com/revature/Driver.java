@@ -20,6 +20,8 @@ public class Driver {
 
 //	    User u = udao.findUserByID(126L);
 	    Mission m = mdao.findMissionByMissionID(331L);
+	    Mission m2 = mdao.findMissionByMissionID(332L);
+	    Mission m3 = mdao.findMissionByMissionID(333L);
 		/*
 		 * u.setTreasury(new TreeMap<String, Integer>() ); u.addTreasury("powerUp", 35);
 		 * u.addTreasury("heroEssence", 350); u.addTreasury("heroDollars", 7000);
@@ -27,6 +29,8 @@ public class Driver {
 		 * 
 		 */		 	    
 	    System.out.println(m);
+	    System.out.println(m2);
+	    System.out.println(m3);
 	}
 
 }

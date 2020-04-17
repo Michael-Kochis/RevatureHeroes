@@ -266,10 +266,9 @@ public class Meta implements Comparable<Meta>, Serializable {
 
 	@Override
 	public String toString() {
-		return "Meta [ownerID=" + ownerID + ", gameID=" + gameID + ", superID=" + superID 
-			+ ", name=" + name + ", intelligence=" + intelligence + ", strength=" + strength 
-			+ ", speed=" + speed + ", durability=" + durability + ", power=" + power 
-			+ ", combat=" + combat + ", url=" + url + "]";
+		return "Meta [ownerID=" + ownerID + ", gameID=" + gameID + ", superID=" + superID + ", name=" + name
+				+ ", intelligence=" + intelligence + ", strength=" + strength + ", speed=" + speed + ", durability="
+				+ durability + ", power=" + power + ", combat=" + combat + ", url=" + url + ", status=" + status + "]";
 	}
 
 }
