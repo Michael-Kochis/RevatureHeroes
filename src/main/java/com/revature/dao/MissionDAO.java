@@ -99,6 +99,7 @@ public class MissionDAO implements IMissionDAO {
 		}
 		Mission mission = new Mission(template);
 		
+		
 		mission.setGameID(0);
 		mission.setHeroes(new TreeSet<Hero>() );
 		mission.setMissionFinish(0);
