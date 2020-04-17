@@ -88,7 +88,7 @@ public class MissionService {
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	
-	@RequestMapping(value="/startMission", method= {RequestMethod.POST, 
+	@RequestMapping(value="/startMission", method= {RequestMethod.OPTIONS, RequestMethod.POST, 
 			RequestMethod.PUT}) 
 	public ResponseEntity<Mission> startMission(HttpServletRequest req, 
 			HttpServletResponse res, @RequestBody Mission mission) {
