@@ -63,6 +63,7 @@ public class Meta implements Comparable<Meta>, Serializable {
 	
 	public Meta() {
 		super();
+		this.setStatus(null);
 	}
 
 	public Meta(long ownerID, long gameID, long superID, String name, int intelligence, int strength, int speed,
@@ -79,7 +80,7 @@ public class Meta implements Comparable<Meta>, Serializable {
 		this.power = power;
 		this.combat = combat;
 		this.url = url;
-		this.status = status;
+		this.setStatus(status);
 	}
 
 
@@ -96,7 +97,7 @@ public class Meta implements Comparable<Meta>, Serializable {
 		this.power = power;
 		this.combat = combat;
 		this.url = url;
-		this.status = status;
+		this.setStatus(status);
 	}
 
 	public long getOwnerID() {
@@ -192,6 +193,9 @@ public class Meta implements Comparable<Meta>, Serializable {
 	}
 
 	public void setStatus(String status) {
+		if (status == null) {
+			status = "Available";
+		}
 		this.status = status;
 	}
 
