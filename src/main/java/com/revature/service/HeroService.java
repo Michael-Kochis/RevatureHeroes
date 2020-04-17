@@ -80,11 +80,11 @@ public class HeroService {
 		
 		  for (Hero hero : list) { 
 			  if (dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) != null) {
-				  //hero exists, do nothing.
+				  dao.update(hero);
 			  } else {
 			    dao.save(hero);
 			  }
-			  returnThis.add(dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) ); 
+			  returnThis.add(dao.findHeroByGameID(hero.getGameID()) ); 
 		  }
 		 		
 		res.setContentType("application/json");		
