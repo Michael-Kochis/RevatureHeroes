@@ -193,7 +193,11 @@ public class Mission implements Comparable<Mission> {
 	}
 
 	public void setHeroes(TreeSet<Hero> treeSet) {
-		this.heroes = treeSet;
+		if (treeSet == null) {
+			this.heroes =  new TreeSet<Hero>();
+		} else {
+			this.heroes = treeSet;
+		}
 	}
 
 	@Override
