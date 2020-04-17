@@ -54,6 +54,7 @@ public class Mission implements Comparable<Mission> {
 
 	public Mission() {
 		super();
+		this.setHeroes(new TreeSet<Hero>() );
 	}
 
 	public Mission(long missionID, long templateID, long ownerID, String title, String description,
