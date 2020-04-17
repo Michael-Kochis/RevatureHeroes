@@ -77,17 +77,22 @@ public class HeroService {
 	public ResponseEntity<TreeSet<Hero>> saveHeroes(HttpServletRequest req, 
 			HttpServletResponse res,@RequestBody ArrayList<Hero> list) {
 		TreeSet<Hero> returnThis = new TreeSet<Hero>();
+		long id =0;
 		
 		  for (Hero hero : list) { 
 			  if (dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) != null) {
 				  dao.update(hero);
+				  id = hero.getOwnerID();
 			  } else {
 				  dao.save(hero);
+				  id = hero.getOwnerID();
 			  }
 		  }
-		
-		Hero hero = list.get(0); // get the first hero  
-		returnThis.addAll(dao.findHeroByOwnerID(hero.getGameID()) );
+		if (list.isEmpty() ) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
+		  
+		returnThis.addAll(dao.findHeroByOwnerID(id) );
 		
 		res.setContentType("application/json");		
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
