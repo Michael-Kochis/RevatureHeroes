@@ -37,7 +37,7 @@ public class Mission implements Comparable<Mission> {
 	@Column
 	private TreeMap<String, Object> requirements;
 	
-	@Column
+	@Column()
 	private TreeSet<Hero> heroes;
 	
 	@Column
@@ -66,7 +66,11 @@ public class Mission implements Comparable<Mission> {
 		this.title = title;
 		this.description = description;
 		this.requirements = requirements;
-		this.heroes = heroes;
+		if (heroes == null) {
+			this.heroes = new TreeSet<Hero>();
+		} else {
+			this.heroes = heroes;
+		}
 		this.missionSuccess = missionSuccess;
 		this.missionStart = missionStart;
 		this.missionFinish = missionFinish;
