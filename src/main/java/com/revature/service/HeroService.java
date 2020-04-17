@@ -82,11 +82,13 @@ public class HeroService {
 			  if (dao.findMyHeroByName(hero.getOwnerID(), hero.getName()) != null) {
 				  dao.update(hero);
 			  } else {
-			    dao.save(hero);
+				  dao.save(hero);
 			  }
-			  returnThis.addAll(dao.findHeroByOwnerID(hero.getGameID()) ); 
 		  }
-		 		
+		
+		Hero hero = list.get(0); // get the first hero  
+		returnThis.addAll(dao.findHeroByOwnerID(hero.getGameID()) );
+		
 		res.setContentType("application/json");		
 		return ResponseEntity.status(HttpStatus.OK).body(returnThis);
 	}
