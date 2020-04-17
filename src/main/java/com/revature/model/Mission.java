@@ -38,7 +38,7 @@ public class Mission implements Comparable<Mission> {
 	private TreeMap<String, Object> requirements;
 	
 	@Column
-	private Set<Hero> heroes;
+	private TreeSet<Hero> heroes;
 	
 	@Column
 	private Double missionSuccess;
