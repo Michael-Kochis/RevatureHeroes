@@ -18,14 +18,14 @@ public class Driver {
 		IUserDAO udao = ac.getBean(IUserDAO.class);
 		IMissionDAO mdao = ac.getBean(IMissionDAO.class);
 
-	    User u = udao.findUserByID(130L);
+//	    User u = udao.findUserByID(126L);
 	    Mission m = mdao.findMissionByMissionID(331L);
 		/*
 		 * u.setTreasury(new TreeMap<String, Integer>() ); u.addTreasury("powerUp", 35);
 		 * u.addTreasury("heroEssence", 350); u.addTreasury("heroDollars", 7000);
 		 * udao.update(u);
 		 * 
-		 */	    
+		 */		 	    
 	    System.out.println(m);
 	}
 
