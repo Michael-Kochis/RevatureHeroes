@@ -38,12 +38,14 @@ public class User implements Comparable<User> {
 
 	public User() {
 		super();
+		this.setTreasury(new TreeMap<String, Integer>() );
 	}
 
 	public User(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
+		this.setTreasury(new TreeMap<String, Integer>() );
 	}
 
 	public User(long id, String username, String password, TreeMap<String, Integer> treasury, Set<Hero> heroes) {
@@ -51,7 +53,7 @@ public class User implements Comparable<User> {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.treasury = treasury;
+		this.setTreasury(treasury);
 		this.heroes = heroes;
 	}
 
@@ -85,7 +87,14 @@ public class User implements Comparable<User> {
 	}
 
 	public void setTreasury(TreeMap<String, Integer> treasury) {
-		this.treasury = treasury;
+		if (treasury == null) {
+			this.treasury = new TreeMap<String, Integer>();
+		} else {
+			this.treasury = treasury;
+		}
+		this.addTreasury("heroDollars", 0);
+		this.addTreasury("heroEssence", 0);
+		this.addTreasury("powerUp", 0);
 	}
 	
 	public Set<Hero> getHeroes() {
