@@ -50,11 +50,14 @@ public class MissionService {
 		user.addTreasury("powerUp", rewards);
 		rewardList.put("powerUp", rewards);
 		
-		user.addTreasury("heroEssence", rewards*10);
-		rewardList.put("heroEssence", rewards*10);
+		double dice = Math.random()*100 + 1;
+		int mult = (dice > mission.getMissionSuccess() )?10:5; 
 		
-		user.addTreasury("heroDollars", rewards*rewards*10);
-		rewardList.put("heroDollars", rewards*rewards*10);
+		user.addTreasury("heroEssence", rewards*mult);
+		rewardList.put("heroEssence", rewards*mult);
+		
+		user.addTreasury("heroDollars", rewards*rewards*mult);
+		rewardList.put("heroDollars", rewards*rewards*mult);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(rewardList);
 	}
@@ -90,15 +93,16 @@ public class MissionService {
 	
 	@RequestMapping(value="/startMission", method= {RequestMethod.OPTIONS, RequestMethod.POST, 
 			RequestMethod.PUT}) 
-	public ResponseEntity<Mission> startMission(HttpServletRequest req, 
+	public ResponseEntity<TreeSet<Mission>> startMission(HttpServletRequest req, 
 			HttpServletResponse res, @RequestBody Mission mission) {
 		if (!mission.getMissionStatus().equalsIgnoreCase("Available")) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
 		mission.setMissionStatus("In Progress");
 		dao.update(mission);
+		TreeSet<Mission> allMissions = dao.findMissionByOwnerID(mission.getOwnerID() );
 		
-		return ResponseEntity.status(HttpStatus.OK).body(mission);
+		return ResponseEntity.status(HttpStatus.OK).body(allMissions);
 	}
 
 }
