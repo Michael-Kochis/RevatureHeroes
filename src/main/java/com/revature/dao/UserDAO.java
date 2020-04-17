@@ -50,7 +50,7 @@ public class UserDAO implements IUserDAO {
 		User returnThis = null;
 		
 		for (User user : list) {
-			if (user.getUsername().contains(uName)) {
+			if (user.getUsername().equalsIgnoreCase(uName)) {
 				returnThis = user;
 			}
 		}

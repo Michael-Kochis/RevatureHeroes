@@ -74,7 +74,7 @@ public class UserService {
 		if (login == null) {
 			return null;
 		}
-		User user = dao.findUserByName(login.getUserName());
+		User user = dao.findUserByName(login.getUserName() );
 		if (user == null) {
 			return null;
 		} else if (!user.checkPassword(login.getPassword()) ) {
