@@ -95,7 +95,9 @@ public class MissionService {
 			RequestMethod.PUT}) 
 	public ResponseEntity<TreeSet<Mission>> startMission(HttpServletRequest req, 
 			HttpServletResponse res, @RequestBody Mission mission) {
-		if (!mission.getMissionStatus().equalsIgnoreCase("Available")) {
+		if (mission.getMissionStatus().equalsIgnoreCase("In Progress")) {
+			complete(mission);
+		} else if (!mission.getMissionStatus().equalsIgnoreCase("Available")) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
 		mission.setMissionStatus("In Progress");
@@ -103,6 +105,20 @@ public class MissionService {
 		TreeSet<Mission> allMissions = dao.findMissionByOwnerID(mission.getOwnerID() );
 		
 		return ResponseEntity.status(HttpStatus.OK).body(allMissions);
+	}
+
+	private void complete(Mission mission) {
+		int rewards = (int) mission.getRequirements().floorEntry("missionLevel").getValue();
+		rewards /= 10;  if (rewards < 1) rewards = 1;
+		User user = udao.findUserByID(mission.getOwnerID() );
+
+		user.addTreasury("powerUp", rewards);
+		
+		double dice = Math.random()*100 + 1;
+		int mult = (dice > mission.getMissionSuccess() )?10:5; 
+		
+		user.addTreasury("heroEssence", rewards*mult);	
+		user.addTreasury("heroDollars", rewards*rewards*mult);	
 	}
 
 }
