@@ -22,9 +22,15 @@ public class Hero extends Meta implements Serializable {
 	}
 
 	public Hero(long ownerID, long gameID, long superID, String name, int intelligence, int strength, int speed,
-			int durability, int power, int combat, String url) {
-		super(ownerID, gameID, superID, name, intelligence, strength, speed, durability, power, combat, url);
+			int durability, int power, int combat, String url, String status) {
+		super(ownerID, gameID, superID, name, intelligence, strength, speed, durability, power, combat, url, status);
 	}
+
+	public Hero(long ownerID, long superID, String name, int intelligence, int strength, int speed, int durability,
+			int power, int combat, String url, String status) {
+		super(ownerID, superID, name, intelligence, strength, speed, durability, power, combat, url, status);
+	}
+
 
 	
 }

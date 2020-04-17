@@ -79,7 +79,7 @@ public class Meta implements Comparable<Meta>, Serializable {
 		this.power = power;
 		this.combat = combat;
 		this.url = url;
-		this.setStatus(status);
+		this.status = status;
 	}
 
 
