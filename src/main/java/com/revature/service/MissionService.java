@@ -99,8 +99,9 @@ public class MissionService {
 			complete(mission);
 		} else if (!mission.getMissionStatus().equalsIgnoreCase("Available")) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		} else {
+		    mission.setMissionStatus("In Progress");
 		}
-		mission.setMissionStatus("In Progress");
 		dao.update(mission);
 		TreeSet<Mission> allMissions = dao.findMissionByOwnerID(mission.getOwnerID() );
 		
