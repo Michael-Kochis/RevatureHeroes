@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.dao.interfaces.IMissionDAO;
+import com.revature.model.Hero;
 import com.revature.model.Mission;
 
 @Repository
@@ -99,7 +100,7 @@ public class MissionDAO implements IMissionDAO {
 		Mission mission = new Mission(template);
 		
 		mission.setGameID(0);
-		mission.setHeroes(new TreeSet<Long>() );
+		mission.setHeroes(new TreeSet<Hero>() );
 		mission.setMissionFinish(0);
 		mission.setMissionStart(0);
 		mission.setMissionStatus("Available");

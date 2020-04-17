@@ -45,12 +45,14 @@ public class MissionService {
 		int rewards = (int) mission.getRequirements().floorEntry("missionLevel").getValue();
 		rewards /= 10;  if (rewards < 1) rewards = 1;
 		User user = udao.findUserByID(mission.getOwnerID() );
-		for (Long id : mission.getHeroes() ) {
-			user.addTreasury("powerUp", rewards);
-		}
+
+
+		user.addTreasury("powerUp", rewards);
 		rewardList.put("powerUp", rewards);
+		
 		user.addTreasury("heroEssence", rewards*10);
 		rewardList.put("heroEssence", rewards*10);
+		
 		user.addTreasury("heroDollars", rewards*rewards*10);
 		rewardList.put("heroDollars", rewards*rewards*10);
 		
