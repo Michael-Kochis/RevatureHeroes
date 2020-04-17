@@ -1,5 +1,6 @@
 package com.revature.model;
 
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -37,7 +38,7 @@ public class Mission implements Comparable<Mission> {
 	private TreeMap<String, Object> requirements;
 	
 	@Column
-	private TreeSet<Hero> heroes;
+	private Set<Hero> heroes;
 	
 	@Column
 	private Double missionSuccess;
@@ -161,7 +162,7 @@ public class Mission implements Comparable<Mission> {
 	}
 
 	public TreeSet<Hero> getHeroes() {
-		return heroes;
+		return (TreeSet)heroes;
 	}
 	
 	public Double getMissionSuccess() {
