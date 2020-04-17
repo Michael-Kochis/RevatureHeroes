@@ -1,5 +1,7 @@
 package com.revature.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="META")
-public class Hero extends Meta{
+public class Hero extends Meta {
 
 	public Hero() {
 		super();

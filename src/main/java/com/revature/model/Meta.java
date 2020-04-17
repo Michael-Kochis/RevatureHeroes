@@ -1,5 +1,7 @@
 package com.revature.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +16,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Component
 @Entity
 @Table(name="META")
-public class Meta implements Comparable<Meta> {
+public class Meta implements Comparable<Meta>, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5738513520110945597L;
+
 	@Column
 	long ownerID;
 	
