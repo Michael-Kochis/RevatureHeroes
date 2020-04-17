@@ -84,7 +84,7 @@ public class HeroService {
 			  } else {
 			    dao.save(hero);
 			  }
-			  returnThis.add(dao.findHeroByGameID(hero.getGameID()) ); 
+			  returnThis.addAll(dao.findHeroByOwnerID(hero.getGameID()) ); 
 		  }
 		 		
 		res.setContentType("application/json");		
